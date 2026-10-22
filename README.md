@@ -1,81 +1,96 @@
-# 🪔 Diwali Special Quiz
+# 🪔 Happy Diwali 2026 · Kanak Dovloper 🪔
 
-Ek **single-file** HTML quiz app — Diwali theme, fireworks, score + streak bonus, aur result
-WhatsApp pe directly share karne ke liye ready.
+**Premium, HD, pro-style** Diwali celebration app — ek hi HTML file me:
+Diwali **Quiz** + **Lucky Wheel** + **Diya Dash** game + **Wish Generator** + shareable result card.
 
-Link sabko bhejne ke baad har koi apna naam daal ke khele, apna score dekhe aur wahi link
-apas mein aage bhejega 🔁 (growth loop).
-
----
-
-## ✨ Features
-
-| Feature | Detail |
-|---|---|
-| 16 Questions | Diwali GK (Hindi/Hinglish), har sawaal ka explanation |
-| Timer | 15 sec per question, timeout pe auto-reveal |
-| Scoring | 10 pts correct + 5 pts streak bonus (3+ streak) |
-| Animations | Fireworks on correct answer, confetti + diyas background |
-| Personalised | Naam ke saath score, local leaderboard (device par) |
-| Sharing | WhatsApp, Copy Message, Copy Link, Native Share |
-| Result card | Ek click me PNG image download (WhatsApp status ke liye) |
-| Mobile | Fully responsive, Android/iOS friendly |
-| Offline-safe | Single file, no build step, no dependencies |
+Link sabko bhejo → har koi apna naam daal ke khele → apna score + wish WhatsApp par bheje → wahi link
+apas mein aage jaaye 🔁
 
 ---
 
-## 🚀 GitHub Pages se host karo (2 minute)
+## 🎮 Features
 
-1. **Repo banao** → GitHub par `New repository` → naam do (jaise `diwali-quiz`) → **Public** rakho.
-2. **File upload** → repo me `Add file` → `Upload files` → `index.html` ko drag & drop karo → **Commit changes**.
-3. **Pages on karo** → repo me **Settings** → **Pages** (left menu) →
+| # | Feature | Detail |
+|---|---|---|
+| 1 | 🎯 **Diwali Quiz** | 16 GK questions (Hinglish), 15s timer, auto-reveal, explanation har sawaal ke saath |
+| 2 | 🎡 **Lucky Wheel** | 8 prize segments, 4.4s smooth spin, winner popup + shareable prize message |
+| 3 | 🪔 **Diya Dash** | 20-second reflex game — diyas tap karo, bombs se bacho, score share karo |
+| 4 | 💌 **Wish Generator** | 4 tones (Warm / Funny / Desi / Pro) — naam + link ke saath auto message, copy & share |
+| 5 | 🏆 **Scoring** | 10 pts per correct + 5 pts streak bonus (3+ streak) — max 160 |
+| 6 | 📊 **Result Card** | Dial gauge, stats, aur ek click me **PNG card** download (WhatsApp status ke liye) |
+| 7 | 📲 **Sharing** | WhatsApp, Copy Message, Copy Link, Native Share (mobile) |
+| 8 | 👑 **Leaderboard** | Device-par local leaderboard (naam + score) |
+| 9 | ✨ **Design** | Gold-foil typography, glassmorphism, aurora blobs, film grain, fireworks, confetti, ripple buttons, 3D hover |
+| 10 | 📱 **Mobile** | Fully responsive + `prefers-reduced-motion` support |
+
+---
+
+## 🚀 GitHub Pages par host karo (2 minute)
+
+1. **Repo banao** → GitHub par `New repository` → naam do (e.g. `diwali-quiz`) → **Public** rakho.
+2. **Upload** → `Add file` → `Upload files` → `index.html` drag & drop → **Commit changes**.
+3. **Pages on** → **Settings** → **Pages** →
    - Source: **Deploy from a branch**
-   - Branch: **main** / **root**
-   - Save
-4. **Link copy karo** → 1-2 minute me ye link live ho jayega:
+   - Branch: **main** / **root** → **Save**
+4. **Link ready** (1-2 min me):
 
 ```
 https://YOUR-USERNAME.github.io/diwali-quiz/
 ```
 
-> Link me apna naam daal ke bhi bhej sakte ho — quiz us naam se greet karega:
-> `https://YOUR-USERNAME.github.io/diwali-quiz/?name=Rahul`
+5. **WhatsApp pe bhejo** → app me **🔗 Link** button → apni cast/custom list me paste karo 🎉
 
-5. **WhatsApp pe bhejo** → app me "Copy Link" → apni cast/custom list me paste karo. 🎉
+> Naam ke saath link: `https://YOUR-USERNAME.github.io/diwali-quiz/?name=Rahul`
+> (quiz us naam se greet karega)
 
-### Local test (bina upload)
-
-`index.html` ko browser me khol lo — sab kaam karega. Bas link `file:///` jaisa hoga, isliye
-share karne se pehle GitHub Pages par zaroor host karo.
+**Local test:** `index.html` ko browser me khol lo — sab chalta hai, bas share ka link `file:///`
+hoga, isliye share karne se pehle Pages par host zaroor karo.
 
 ---
 
-## ✏️ Apna naam / tagline change karo
+## ✏️ Apni details badlo
 
-`index.html` ke top me `CONFIG` block:
+`index.html` ke top me `CONFIG` block (search `const CONFIG`):
 
 ```js
 const CONFIG = {
-  hostName: "Aakash",        // <- apna naam
-  hostTagline: "Diwali ki hardik shubhkamnayein! 🎇",
-  whatsapp: ""               // optional: "919999999999"
+  brand: "Kanak Dovloper",     // <- apna naam / brand
+  tagline: "Khelo, jeeto aur apna score sabke saath share karo! 🎇",
+  timePerQuestion: 15,         // quiz timer (seconds)
+  prizes: [                    // Lucky Wheel ke prizes (label + color)
+    { t: "₹100 Cashback", c: "#f5c451" },
+    { t: "Mithai Box",    c: "#ff8a3d" },
+    /* ... 8 total ... */
+  ]
 };
 ```
 
+Brand ka spelling ya logo text badalna ho → sirf `CONFIG.brand` change karo, poora app update ho jayega
+(top bar, hero, footer, share messages, result card — sab jagah).
+
 ### Apne questions add karo
 
-`QUESTIONS` array me isi format me add karo:
+`QUESTIONS` array me isi format me:
 
 ```js
 {
   q: "Sawal ka text?",
   o: ["Option A", "Option B", "Option C", "Option D"],
   a: 0,                      // sahi option ka index (0-3)
-  e: "Answer ka explanation — result screen par dikhega."
+  e: "Explanation — result screen par dikhega."
 }
 ```
 
-> Options har question me automatically shuffle hote hain, toh sahi jawab hamesha "A" nahi hoga.
+> Options har question me auto-shuffle hote hain, isliye sahi jawab hamesha "A" nahi hoga.
+
+---
+
+## 🎨 Design tweaks
+
+- **Colours**: `:root` me `--gold`, `--saffron`, `--wine`, `--foil` (gold-foil gradient) badlo.
+- **Font**: `<head>` me Google Fonts link — abhi **Cinzel** (display) + **Plus Jakarta Sans** (UI) + **Baloo 2** (Hindi).
+- **Result card image**: canvas 1080×1350 (4:5, WhatsApp status perfect).
+- **Preview image** (WhatsApp link preview): `og:image` ke liye `preview.png` rakho aur uska URL `<head>` me daalo.
 
 ---
 
@@ -83,20 +98,10 @@ const CONFIG = {
 
 ```
 diwali-quiz/
-├── index.html   # poora app (HTML + CSS + JS ek hi file me)
+├── index.html   # poora app (HTML + CSS + JS — ek hi file, zero dependency)
 └── README.md
 ```
 
 ---
 
-## 🎨 Customise (optional)
-
-- **Theme colours**: `index.html` me `:root` me `--gold`, `--gold2`, `--bg`, `--bg2` badlo.
-- **Timer**: `const TIME_PER_Q = 15;` badlo (seconds).
-- **Quiz length**: `QUESTIONS` array me se questions hatao — baaki sab apne aap adjust ho jayega.
-- **Preview image** (WhatsApp link preview): `og:image` ke liye `preview.png` add karke uska URL
-  `index.html` ke `<head>` me daalo.
-
----
-
-Made with 🪔 for Diwali 🎇
+Made with 🪔 by **Kanak Dovloper** · Happy Diwali 2026 🎇
