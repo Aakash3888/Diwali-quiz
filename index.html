@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>🪔 Diwali Special Quiz 🪔</title>
+<meta name="description" content="Diwali Special Quiz - Test your Diwali knowledge, win score and share the wish with friends.">
+<meta name="theme-color" content="#2b0a12">
+<meta property="og:title" content="🪔 Diwali Special Quiz 🪔">
+<meta property="og:description" content="Khelo Diwali quiz aur apna score share karo!">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪔</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1b0510;
+  --bg2:#3d0c1c;
+  --gold:#ffc542;
+  --gold2:#ff8a1f;
+  --saffron:#ff7a18;
+  --deep:#2a0714;
+  --card:rgba(255,255,255,.07);
+  --line:rgba(255,197,66,.28);
+  --txt:#fff6e6;
+  --muted:#e8cfa6;
+  --ok:#2ecc71;
+  --bad:#ff4d5e;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:'Poppins','Baloo 2',system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--txt);
+  background:
+    radial-gradient(1200px 700px at 15% -10%, #6d1330 0%, transparent 60%),
+    radial-gradient(1000px 600px at 90% 5%, #4a0d2a 0%, transparent 55%),
+    linear-gradient(180deg,var(--bg) 0%, var(--bg2) 55%, #17040c 100%);
+  background-attachment:fixed;
+  overflow-x:hidden;
+  display:flex;flex-direction:column;align-items:center;
+  min-height:100dvh;
+}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.wrap{position:relative;z-index:2;width:100%;max-width:640px;padding:14px 14px 26px;flex:1;display:flex;flex-direction:column}
+
+/* ---------- decorative diyas ---------- */
+.diyas{position:fixed;left:0;right:0;bottom:0;height:120px;display:flex;justify-content:center;align-items:flex-end;gap:14px;opacity:.85;z-index:1;pointer-events:none;filter:drop-shadow(0 0 14px rgba(255,150,40,.45))}
+.diya{width:34px;animation:flick 2.4s infinite ease-in-out}
+.diya:nth-child(2n){animation-delay:.4s}.diya:nth-child(3n){animation-delay:.9s}.diya:nth-child(4n){animation-delay:1.3s}
+@keyframes flick{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.06)}}
+
+/* ---------- top bar ---------- */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.brand{display:flex;align-items:center;gap:9px;font-family:'Baloo 2',cursive;font-weight:700;font-size:clamp(16px,4.4vw,21px);line-height:1}
+.brand .btext{background:linear-gradient(90deg,var(--gold),var(--saffron),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shine 4s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+.tools{display:flex;gap:8px}
+.tbtn{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--txt);border-radius:12px;padding:7px 11px;font-size:13px;cursor:pointer;font-family:inherit;transition:.2s}
+.tbtn:hover{background:rgba(255,197,66,.16);transform:translateY(-1px)}
+.tbtn.off{opacity:.45}
+
+/* ---------- cards / screens ---------- */
+.screen{display:none;animation:fade .45s ease both}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;backdrop-filter:blur(12px);box-shadow:0 18px 45px rgba(0,0,0,.45)}
+.title{font-family:'Baloo 2',cursive;font-size:clamp(26px,7.4vw,40px);line-height:1.12;text-align:center;
+  background:linear-gradient(90deg,var(--gold),#fff3c4,var(--saffron),var(--gold));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite}
+.sub{text-align:center;color:var(--muted);font-size:clamp(13px,3.4vw,15px);margin-top:8px}
+.center{text-align:center}
+.hr{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:16px 0}
+label.lbl{display:block;font-size:13px;color:var(--muted);margin:16px 0 7px;font-weight:500}
+input[type=text]{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.28);color:var(--txt);font-size:16px;font-family:inherit;outline:none;transition:.2s}
+input[type=text]:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(255,197,66,.13)}
+.btn{display:block;width:100%;margin-top:16px;padding:15px;border:none;border-radius:16px;cursor:pointer;font-family:'Baloo 2',cursive;font-weight:700;font-size:clamp(17px,4.6vw,20px);letter-spacing:.4px;
+  background:linear-gradient(95deg,var(--gold2),var(--gold));color:#3b1204;box-shadow:0 10px 26px rgba(255,138,31,.34);transition:.18s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(255,138,31,.45)}
+.btn:active{transform:translateY(0) scale(.99)}
+.btn.ghost{background:rgba(255,255,255,.07);color:var(--txt);border:1px solid var(--line);box-shadow:none}
+.btn.green{background:linear-gradient(95deg,#12b76a,#39d98a);color:#032b16}
+.btn.small{font-size:15px;padding:12px}
+.btnrow{display:flex;gap:10px}
+.btnrow .btn{margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.chip{border:1px solid var(--line);background:rgba(255,255,255,.05);border-radius:999px;padding:6px 13px;font-size:13px;color:var(--muted)}
+
+/* ---------- quiz ---------- */
+.qhead{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);margin-bottom:8px;gap:8px}
+.pill{background:rgba(255,197,66,.14);border:1px solid var(--line);color:var(--gold);border-radius:999px;padding:4px 12px;font-weight:600;white-space:nowrap}
+.track{height:8px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin-bottom:6px}
+.track>i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--saffron),var(--gold));transition:width .35s ease}
+.timer{height:4px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:18px}
+.timer>i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ffd76a,#ff5f6d);transition:width .95s linear}
+.qtext{font-family:'Baloo 2',cursive;font-size:clamp(19px,5.1vw,25px);font-weight:600;line-height:1.35;margin-bottom:16px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;padding:14px;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--txt);font-size:15px;font-family:inherit;cursor:pointer;transition:.18s;width:100%}
+.opt:hover:not(:disabled){background:rgba(255,197,66,.14);transform:translateX(3px)}
+.opt:disabled{cursor:default}
+.opt .k{width:28px;height:28px;flex:0 0 28px;border-radius:9px;background:rgba(255,255,255,.1);display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--gold)}
+.opt.correct{background:rgba(46,204,113,.2);border-color:var(--ok)}
+.opt.correct .k{background:var(--ok);color:#052a14}
+.opt.wrong{background:rgba(255,77,94,.2);border-color:var(--bad)}
+.opt.wrong .k{background:var(--bad);color:#fff}
+.opt.dim{opacity:.45}
+.expl{margin-top:14px;padding:13px 15px;border-radius:14px;background:rgba(255,197,66,.1);border-left:4px solid var(--gold);font-size:14px;line-height:1.55;color:#ffeec9;display:none}
+.expl.show{display:block;animation:fade .3s both}
+.expl b{color:var(--gold)}
+
+/* ---------- result ---------- */
+.scorebig{font-family:'Baloo 2',cursive;font-size:clamp(52px,15vw,84px);font-weight:800;line-height:1;
+  background:linear-gradient(180deg,#fff6cf,var(--gold),var(--saffron));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tier{font-family:'Baloo 2',cursive;font-size:clamp(20px,5.4vw,27px);font-weight:700;color:var(--gold);margin:6px 0 4px}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.stat{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:16px;padding:12px 8px}
+.stat b{display:block;font-family:'Baloo 2',cursive;font-size:22px;color:var(--gold);line-height:1.2}
+.stat span{font-size:12px;color:var(--muted)}
+.lb{margin-top:16px;text-align:left}
+.lb h3{font-family:'Baloo 2',cursive;font-size:18px;color:var(--gold);margin-bottom:8px}
+.lb li{list-style:none;display:flex;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:11px;background:rgba(255,255,255,.05);margin-bottom:6px;font-size:14px}
+.lb li.me{background:rgba(255,197,66,.17);border:1px solid var(--line)}
+.lb li b{color:var(--gold)}
+.msgbox{width:100%;min-height:104px;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--txt);font-family:inherit;font-size:14px;line-height:1.55;resize:vertical;outline:none}
+.msgbox:focus{border-color:var(--gold)}
+.sharegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.sbtn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--txt);font-size:14px;font-family:inherit;cursor:pointer;transition:.18s;text-decoration:none}
+.sbtn:hover{background:rgba(255,197,66,.16);transform:translateY(-2px)}
+.wa{background:linear-gradient(95deg,#128c4a,#25d366);border:none;color:#04220f;font-weight:700}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:50;background:#101010;color:#fff;border:1px solid var(--line);padding:12px 20px;border-radius:14px;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.5);transition:.35s;max-width:90vw;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+footer{text-align:center;color:#b99a6d;font-size:12px;margin-top:18px;padding:0 10px}
+@media (max-width:380px){.card{padding:17px}.statgrid{gap:7px}}
+</style>
+</head>
+<body>
+
+<canvas id="fx"></canvas>
+<div class="diyas" aria-hidden="true">
+  <div class="diya">🪔</div><div class="diya">🪔</div><div class="diya">🪔</div><div class="diya">🪔</div>
+  <div class="diya">🪔</div><div class="diya">🪔</div><div class="diya">🪔</div>
+</div>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand"><span>🪔</span><span class="btext">Diwali Quiz</span></div>
+    <div class="tools">
+      <button class="tbtn" id="soundBtn" title="Sound on/off">🔊</button>
+      <button class="tbtn" id="restartBtn" title="Restart">↻</button>
+    </div>
+  </div>
+
+  <!-- ============ HOME ============ -->
+  <section class="screen active" id="s-home">
+    <div class="card">
+      <div class="center">
+        <div style="font-size:clamp(46px,13vw,72px);filter:drop-shadow(0 0 20px rgba(255,150,40,.55))">🪔</div>
+        <h1 class="title">Diwali Special Quiz</h1>
+        <p class="sub" id="homeSub">Diwali ke 16 sawal — kitne tumhe aate hain? Dekho aur score share karo! 🎆</p>
+      </div>
+
+      <div class="chips">
+        <span class="chip">⏱ 15 sec per question</span>
+        <span class="chip">🏆 Score + Streak bonus</span>
+        <span class="chip">📲 Shareable result</span>
+      </div>
+
+      <label class="lbl" for="nameInput">Apna naam likho (score aapke naam se save hoga)</label>
+      <input type="text" id="nameInput" maxlength="24" placeholder="e.g. Rahul" autocomplete="name">
+
+      <button class="btn" id="startBtn">🔥 Quiz Start Karo</button>
+      <p class="sub" style="margin-top:12px;font-size:12.5px" id="bestTxt"></p>
+
+      <div class="hr"></div>
+      <div class="lb" id="lbBox" style="display:none">
+        <h3>🏆 Leaderboard (is device par)</h3>
+        <ul id="lbList" style="list-style:none"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="screen" id="s-quiz">
+    <div class="card">
+      <div class="qhead">
+        <span>Question <b id="qNow">1</b>/<b id="qTotal">16</b></span>
+        <span class="pill">⭐ <b id="scoreNow">0</b></span>
+      </div>
+      <div class="track"><i id="qBar"></i></div>
+      <div class="timer"><i id="tBar"></i></div>
+
+      <div class="qtext" id="qText">Loading…</div>
+      <div class="opts" id="opts"></div>
+      <div class="expl" id="expl"></div>
+      <button class="btn" id="nextBtn" style="display:none">Next Question →</button>
+    </div>
+  </section>
+
+  <!-- ============ RESULT ============ -->
+  <section class="screen" id="s-result">
+    <div class="card">
+      <div class="center">
+        <div style="font-size:clamp(40px,11vw,62px)">🎆</div>
+        <div class="scorebig" id="rScore">0</div>
+        <div class="tier" id="rTier"></div>
+        <p class="sub" id="rMsg"></p>
+      </div>
+
+      <div class="statgrid">
+        <div class="stat"><b id="rCorrect">0</b><span>Correct</span></div>
+        <div class="stat"><b id="rWrong">0</b><span>Wrong</span></div>
+        <div class="stat"><b id="rStreak">0</b><span>Best Streak</span></div>
+      </div>
+
+      <label class="lbl">Apna message edit karo (WhatsApp ke liye ready)</label>
+      <textarea class="msgbox" id="msgBox"></textarea>
+
+      <div class="sharegrid">
+        <a class="sbtn wa" id="waBtn" target="_blank" rel="noopener">🟢 WhatsApp</a>
+        <button class="sbtn" id="copyBtn">📋 Copy Message</button>
+        <button class="sbtn" id="linkBtn">🔗 Copy Link</button>
+        <button class="sbtn" id="nativeBtn">📤 Share</button>
+        <button class="sbtn" id="imgBtn">🖼️ Save Result</button>
+        <button class="sbtn" id="againBtn">🔁 Again</button>
+      </div>
+
+      <div class="btnrow">
+        <button class="btn ghost small" id="wishBtn">🪔 Diwali Wish Bhejo</button>
+        <button class="btn ghost small" id="editBtn">✏️ Naam Badlo</button>
+      </div>
+
+      <div class="lb" id="lbBox2" style="display:none">
+        <h3>🏆 Leaderboard (is device par)</h3>
+        <ul id="lbList2" style="list-style:none"></ul>
+      </div>
+    </div>
+  </section>
+
+  <footer id="foot">Made with 🪔 for <b id="hostName">Aakash</b> · <span id="hostTag"></span></footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   CONFIG — yahan apni details badal lo (naam, tagline, number)
+   ========================================================= */
+const CONFIG = {
+  hostName: "Aakash",
+  hostTagline: "Diwali ki hardik shubhkamnayein! 🎇",
+  whatsapp: ""            // optional: "919999999999" (country code ke saath)
+};
+
+/* =========================================================
+   QUESTIONS
+   ========================================================= */
+const QUESTIONS = [
+  { q: "\"दीपावली\" शब्द किससे बना है?",
+    o: ["दीप + आवली (दीपों की कतार)", "दिन + वाली", "दिव + अली", "दीप + वाला"], a: 0,
+    e: "दीपावली = दीप (सुगंधित दीपक) + आवली (सीधी कतार/पंक्ति) — यानी \"दीपों की कतार\" वाला त्योहार।" },
+
+  { q: "दिवाली किस देवी को समर्पित है?",
+    o: ["लक्ष्मी", "दुर्गा", "सरस्वती", "काली"], a: 0,
+    e: "दिवाली का मुख्य उद्देश्य माँ लक्ष्मी (धन और समृद्धि की देवी) की पूजा है।" },
+
+  { q: "दिवाली से एक दिन पहले कौन-सा त्योहार आता है?",
+    o: ["धनतेरस", "बकरे बैजारा", "छट पूजा", "गणेश चतुर्थी"], a: 0,
+    e: "दिवाली से एक दिन पहले धनतेरस आता है, जिसमें धनवंशकृष्ण और कुबेर की पूजा की जाती है।" },
+
+  { q: "दिवाली का मुख्य दिन (लक्ष्मी पूजन वाला) क्या कहलाता है?",
+    o: ["नरक चतुर्दशी", "दीपावली", "गोवर्धन पूजा", "भाई दूज"], a: 0,
+    e: "दिवाली का मुख्य दिन नरक चतुर्दशी (चतुर्दशी) है — इसी दिन लक्ष्मी-पूजन होता है।" },
+
+  { q: "दिवाली का दूसरा दिन किस त्योहार के रूप में मनाया जाता है?",
+    o: ["गोवर्धन पूजा", "भाई दूज", "धनतेरस", "नवरात्रि"], a: 0,
+    e: "दूसरे दिन गोवर्धन पूजा (वृंदावन चतुर्दशी) मनाई जाती है, जिसमें गाय के सींग में गोवर्धन भगवान की पूजा होती है।" },
+
+  { q: "भाई-बहन का त्योहार दिवाली के कौन से दिन मनाया जाता है?",
+    o: ["तीसरे दिन (भाई दूज)", "पहले दिन", "दूसरे दिन", "चौथे दिन"], a: 0,
+    e: "दिवाली के तीसरे दिन भाई दूज (यम दोज) मनाया जाता है — भाई बहन राखी बंधते हैं।" },
+
+  { q: "भगवान राम 14 साल के वनवास के बाद किस दिन लौटे?",
+    o: ["दिवाली के दिन", "होली के दिन", "जन्माष्टमी के दिन", "नवरात्रि के दिन"], a: 0,
+    e: "रामायण के अनुसार श्रीराम 14 वर्ष के वनवास के बाद अयोध्या दिवाली के दिन लौटे।" },
+
+  { q: "धनतेरस पर मुख्यतः किस देवता/लक्ष्य की पूजा की जाती है?",
+    o: ["धनवंशकृष्ण / कुबेर (धन-धन की प्राप्ति)", "गणेश जी", "सरस्वती जी", "शनि देव"], a: 0,
+    e: "धनतेरस का अर्थ \"धन का तीसरा दिन\" — धनवंशकृष्ण और कुबेर की पूजा कर धन-धन की कामाई का आशीर्वाद लिया जाता है।" },
+
+  { q: "\"अगरतो\" किस पौधे के बीज को कहा जाता है?",
+    o: ["मूंग (मातुलुंगा)", "चना", "गेहूं", "मसूर"], a: 0,
+    e: "अगरतो यानी मातुलुंगा/मूंग — दिवाली के दिन अगरतो के बीज बोने की परंपरा है।" },
+
+  { q: "दीपक सामान्यतः किस तेल से बनाए जाते हैं?",
+    o: ["मूंगफली या सरसों का तेल", "पानी", "दूध", "सिरका"], a: 0,
+    e: "दीपक तेल वाले (मूंगफली/सरसों/सूअर घी) से बनाए जाते हैं, कपास की रसी से भी।" },
+
+  { q: "दिवाली की रात \"लक्ष्मी यंत्र\" (खरा लक्ष्मी यंत्र) किससे बनाते हैं?",
+    o: ["सूअर दूध में भरे चावल के दानों से", "सफेद कागज़ से", "सात चीज़ों से", "लाल रंग से"], a: 0,
+    e: "सूअर के दूध में चावल के दाने भरकर लक्ष्मी यंत्र बनाते हैं — इसे ही \"खरा/पूरा लक्ष्मी यंत्र\" कहते हैं।" },
+
+  { q: "राखी कौन बनाता है?",
+    o: ["भाई अपनी बहन के लिए", "बहन अपने भाई के लिए", "पिता अपने बेटे के लिए", "दोस्त दोस्त के लिए"], a: 0,
+    e: "राखी बंधन का अनुष्ठान भाई द्वारा बहन के हाथ पर राखी बांधने के रूप में किया जाता है।" },
+
+  { q: "दिवाली का मुख्य दिन किस देवी-देवता के विवाह का प्रतीक माना जाता है?",
+    o: ["शिव-पार्वती", "राम-सीता", "कृष्ण-राधा", "विष्णु-लक्ष्मी"], a: 0,
+    e: "नरक चतुर्दशी को शिव-पार्वती के विवाह, हनुमान की महिला रूप में पूजा और चावल के दाने बनाने की परंपरा से जोड़ा जाता है।" },
+
+  { q: "दिवाली की रात सरस्वती जी की पूजा किस उद्देश्य से की जाती है?",
+    o: ["विद्या और कला की कामाई के लिए", "पैसे के लिए", "स्वास्थ्य के लिए", "यात्रा के लिए"], a: 0,
+    e: "दिवाली की शाम सरस्वती, धन-धर्य और कली कुमारी की पूजा होती है — विद्या, बुद्धि और कला के लिए।" },
+
+  { q: "बंगाल में दिवाली को किस रूप में मनाया जाता है?",
+    o: ["काली पूजा (दीपा काली)", "छट पूजा", "गणेश चतुर्थी", "ओणम"], a: 0,
+    e: "बंगाल में दिवाली \"काली पूजा\" या \"दीपा काली\" के रूप में मनाई जाती है।" },
+
+  { q: "भारत में एक साथ सबसे ज्यादा दीप जलाने का गिनतीज वर्ल्ड रिकॉर्ड कहाँ बना?",
+    o: ["भुबनेश्वर (ओडिशा)", "वाराणसी", "जयपुर", "अहमदाबाद"], a: 0,
+    e: "ओडिशा के भुबनेश्वर में एक साथ लाखों दीप जलाकर गिनतीज वर्ल्ड रिकॉर्ड बनाया गया।" }
+];
+
+/* =========================================================
+   STATE
+   ========================================================= */
+const S = {
+  i: 0, score: 0, correct: 0, wrong: 0, streak: 0, bestStreak: 0,
+  locked: false, name: "", timeLeft: 15, timer: null, cur: null
+};
+const $ = id => document.getElementById(id);
+const MAX_POINTS = QUESTIONS.length * 10;
+const TIME_PER_Q = 15;
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+let toastT;
+function toast(msg){
+  const t = $('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+/* =========================================================
+   SOUND (Web Audio, no external files)
+   ========================================================= */
+let audioCtx = null, soundOn = localStorage.getItem('dwq_sound') !== 'off';
+function beep(freq, dur, type, vol){
+  if(!soundOn) return;
+  try{
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = type || 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(0, audioCtx.currentTime);
+    g.gain.linearRampToValueAtTime(vol || .18, audioCtx.currentTime + .02);
+    g.gain.exponentialRampToValueAtTime(.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  }catch(e){}
+}
+function sfxRight(){ beep(660,.12,'sine',.2); setTimeout(()=>beep(880,.16,'sine',.2),100); setTimeout(()=>beep(1180,.22,'sine',.18),200); }
+function sfxWrong(){ beep(220,.2,'sawtooth',.14); setTimeout(()=>beep(150,.28,'sawtooth',.12),140); }
+function sfxTick(){ beep(440,.05,'triangle',.06); }
+
+/* =========================================================
+   FIREWORKS + CONFETTI CANVAS
+   ========================================================= */
+const cv = $('fx'), ctx = cv.getContext('2d');
+let parts = [], confetti = [], raf = null;
+function sizeCanvas(){ cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0); }
+sizeCanvas(); addEventListener('resize', sizeCanvas);
+
+function burst(x, y, color, count){
+  for(let i=0;i<(count||40);i++){
+    const a = Math.random()*Math.PI*2, s = Math.random()*3.6+0.6;
+    parts.push({x, y, vx:Math.cos(a)*s, vy:Math.sin(a)*s, life:1, r:Math.random()*2.4+1, c:color||'#ffc542'});
+  }
+  if(!raf) raf = requestAnimationFrame(loop);
+}
+function confettiRain(){
+  for(let i=0;i<130;i++){
+    confetti.push({x:Math.random()*innerWidth, y:-20-Math.random()*innerHeight*.5, vx:(Math.random()-.5)*2.4, vy:Math.random()*2.6+1.4, r:Math.random()*7+3, c:['#ffc542','#ff7a18','#25d366','#ff4d5e','#ffffff','#ffe08a'][Math.floor(Math.random()*6)], rot:Math.random()*Math.PI, vr:(Math.random()-.5)*.28});
+  }
+  if(!raf) raf = requestAnimationFrame(loop);
+}
+function loop(){
+  ctx.clearRect(0,0,innerWidth,innerHeight);
+  let alive = false;
+  for(let i=parts.length-1;i>=0;i--){
+    const p = parts[i];
+    p.x += p.vx; p.y += p.vy; p.vy += .045; p.vx *= .99; p.vy *= .99; p.life -= .012;
+    if(p.life <= 0){ parts.splice(i,1); continue; }
+    alive = true;
+    ctx.globalAlpha = Math.max(p.life,0);
+    ctx.fillStyle = p.c;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+  }
+  for(let i=confetti.length-1;i>=0;i--){
+    const c = confetti[i];
+    c.x += c.vx; c.y += c.vy; c.rot += c.vr;
+    if(c.y > innerHeight + 30){ confetti.splice(i,1); continue; }
+    alive = true;
+    ctx.save(); ctx.translate(c.x, c.y); ctx.rotate(c.rot);
+    ctx.globalAlpha = .95; ctx.fillStyle = c.c;
+    ctx.fillRect(-c.r/2, -c.r/2, c.r, c.r * .6);
+    ctx.restore();
+  }
+  ctx.globalAlpha = 1;
+  if(alive){ raf = requestAnimationFrame(loop); } else { raf = null; }
+}
+addEventListener('pointerdown', e => { if(Math.random() < .28) burst(e.clientX, e.clientY, ['#ffc542','#ff7a18','#fff0b3','#25d366'][Math.floor(Math.random()*4)], 22); });
+
+/* =========================================================
+   NAV
+   ========================================================= */
+function show(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  $(id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+const qs = new URLSearchParams(location.search);
+const urlName = (qs.get('name') || '').trim().slice(0, 24);
+$('nameInput').value = urlName || localStorage.getItem('dwq_name') || '';
+$('hostName').textContent = CONFIG.hostName;
+$('hostTag').textContent = CONFIG.hostTagline;
+
+/* =========================================================
+   QUIZ FLOW
+   ========================================================= */
+function startQuiz(){
+  const n = $('nameInput').value.trim();
+  if(!n){ toast('Pehle apna naam likho ✍️'); $('nameInput').focus(); return; }
+  S.name = n; localStorage.setItem('dwq_name', n);
+  S.i = 0; S.score = 0; S.correct = 0; S.wrong = 0; S.streak = 0; S.bestStreak = 0;
+  $('qTotal').textContent = QUESTIONS.length;
+  show('s-quiz');
+  renderQ();
+}
+function shuffleQ(q){
+  const idx = q.o.map((_,i) => i);
+  for(let i = idx.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = idx[i]; idx[i] = idx[j]; idx[j] = tmp;
+  }
+  return { q: q.q, o: idx.map(i => q.o[i]), a: idx.indexOf(q.a), e: q.e };
+}
+function renderQ(){
+  const q = shuffleQ(QUESTIONS[S.i]);
+  S.cur = q;
+  S.locked = false;
+  $('qNow').textContent = S.i + 1;
+  $('scoreNow').textContent = S.score;
+  $('qBar').style.width = ((S.i) / QUESTIONS.length * 100) + '%';
+  $('qText').textContent = q.q;
+  $('expl').classList.remove('show');
+  $('nextBtn').style.display = 'none';
+  $('nextBtn').textContent = (S.i === QUESTIONS.length - 1) ? '🏁 Dekho Result →' : 'Next Question →';
+  const box = $('opts'); box.innerHTML = '';
+  q.o.forEach((opt, idx) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = '<span class="k">' + 'ABCD'[idx] + '</span><span>' + opt + '</span>';
+    b.addEventListener('click', () => choose(idx));
+    box.appendChild(b);
+  });
+  startTimer();
+}
+function startTimer(){
+  clearInterval(S.timer);
+  S.timeLeft = TIME_PER_Q;
+  const bar = $('tBar');
+  bar.style.transition = 'none'; bar.style.width = '100%';
+  requestAnimationFrame(() => { bar.style.transition = 'width ' + TIME_PER_Q + 's linear'; bar.style.width = '0%'; });
+  S.timer = setInterval(() => {
+    S.timeLeft -= 1;
+    if(S.timeLeft <= 5 && S.timeLeft > 0) sfxTick();
+    if(S.timeLeft <= 0){ clearInterval(S.timer); if(!S.locked) reveal(-1, true); }
+  }, 1000);
+}
+function choose(idx){ if(S.locked) return; reveal(idx, false); }
+function reveal(pick, timedOut){
+  S.locked = true;
+  clearInterval(S.timer);
+  const q = S.cur;
+  const btns = [...$('opts').children];
+  btns.forEach((b,i) => {
+    b.disabled = true;
+    if(i === q.a) b.classList.add('correct');
+    else if(i === pick && pick !== -1) b.classList.add('wrong');
+    else b.classList.add('dim');
+  });
+  if(pick === q.a){
+    S.correct++; S.streak++;
+    S.bestStreak = Math.max(S.bestStreak, S.streak);
+    const bonus = S.streak >= 3 ? 5 : 0;
+    S.score += 10 + bonus;
+    sfxRight();
+    const r = btns[q.a].getBoundingClientRect();
+    burst(r.left + r.width/2, r.top + r.height/2, '#2ecc71', 42);
+    toast(bonus ? '⭐ Streak bonus +' + bonus : '✅ Sahi jawab!');
+  } else {
+    S.wrong++; S.streak = 0;
+    sfxWrong();
+    if(timedOut){
+      const r = btns[q.a].getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2, '#ff4d5e', 22);
+      toast('⏰ Time out!');
+    } else {
+      const r = btns[q.a].getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2, '#ffc542', 30);
+    }
+  }
+  $('scoreNow').textContent = S.score;
+  const ex = $('expl');
+  ex.innerHTML = (pick === q.a ? '<b>✅ Sahi!</b> ' : '<b>❌ Galat.</b> ') + q.e;
+  ex.classList.add('show');
+  $('nextBtn').style.display = 'block';
+  $('nextBtn').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+$('nextBtn').addEventListener('click', () => {
+  if(S.i < QUESTIONS.length - 1){ S.i++; renderQ(); }
+  else finish();
+});
+$('startBtn').addEventListener('click', startQuiz);
+$('nameInput').addEventListener('keydown', e => { if(e.key === 'Enter') startQuiz(); });
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+const TIERS = [
+  {min:.9,  t:"🏆 Dhoom Machaao — Diwali Champion!", m:"Bhai tu toh Diwali ka asli expert hai! Sabse aage!"},
+  {min:.7,  t:"✨ Bahut Shandar Performance!", m:"Tu toh mushkil level clear kar gaya, dil khush kar diya!"},
+  {min:.5,  t:"🌟 Admiya Kahaan Hai!", m:"Achha khel rahe ho, thoda aur practice = full marks pakke!"},
+  {min:.25, t:"💪 Rrrrr! Thoda Aur Mehnat", m:"Koshish galat nahi hai. Agli baar aur bhi tez!"},
+  {min:0,   t:"🥳 Diwali Special: Ghar Baitho, Phir Se Try!", m:"Score kam par dil khush! Ekdum mast mood hai!"}
+];
+function finish(){
+  clearInterval(S.timer);
+  const pct = S.score / MAX_POINTS;
+  const tier = TIERS.find(t => pct >= t.min);
+  $('rScore').textContent = S.score + '/' + MAX_POINTS;
+  $('rTier').textContent = tier.t;
+  $('rMsg').textContent = tier.m;
+  $('rCorrect').textContent = S.correct;
+  $('rWrong').textContent = S.wrong;
+  $('rStreak').textContent = S.bestStreak;
+  const url = location.origin + location.pathname;
+  $('msgBox').value = buildMsg(pct, tier, url);
+  saveScore();
+  renderLB();
+  show('s-result');
+  confettiRain();
+  setTimeout(()=>{ burst(innerWidth*0.5, innerHeight*0.3, '#ffc542', 90); }, 350);
+  beep(520,.1,'triangle',.18); setTimeout(()=>beep(660,.1,'triangle',.18),120); setTimeout(()=>beep(880,.25,'triangle',.2),240);
+}
+function buildMsg(pct, tier, url){
+  return '🪔 *Diwali Special Quiz* 🪔\n' +
+    'Main *' + S.name + '* ne apna score kiya: *' + S.score + '/' + MAX_POINTS + '* (' + Math.round(pct*100) + '%)\n' +
+    tier.t + '\n\n' +
+    '👉 Tum bhi khelo aur apna score share karo:\n' + url + '\n\n' +
+    '🪔 ' + CONFIG.hostTagline;
+}
+function saveScore(){
+  try{
+    const key = 'dwq_lb';
+    const lb = JSON.parse(localStorage.getItem(key) || '[]');
+    const pct = S.score / MAX_POINTS;
+    const entry = { name: S.name, score: S.score, pct: Math.round(pct*100), date: Date.now() };
+    lb.push(entry);
+    lb.sort((a,b) => b.score - a.score);
+    localStorage.setItem(key, JSON.stringify(lb.slice(0,20)));
+    showBest();
+  }catch(e){}
+}
+function showBest(){
+  try{
+    const lb = JSON.parse(localStorage.getItem('dwq_lb') || '[]');
+    const best = lb[0];
+    const bt = $('bestTxt');
+    if(best && bt) bt.textContent = '🏆 Best score is device par: ' + best.name + ' — ' + best.score + '/' + MAX_POINTS;
+  }catch(e){}
+}
+function renderLB(){
+  try{
+    const lb = JSON.parse(localStorage.getItem('dwq_lb') || '[]').slice(0,8);
+    if(!lb.length){ $('lbBox').style.display='none'; $('lbBox2').style.display='none'; return; }
+    const html = lb.map((e,i) => '<li class="' + (e.name === S.name ? 'me' : '') + '"><span>' + (i+1) + '. ' + e.name + '</span><b>' + e.score + ' (' + e.pct + '%)</b></li>').join('');
+    ['lbList','lbList2'].forEach(id => { const el = $(id); if(el) el.innerHTML = html; });
+    $('lbBox').style.display='block'; $('lbBox2').style.display='block';
+  }catch(e){}
+}
+
+/* =========================================================
+   SHARE / COPY
+   ========================================================= */
+function currentUrl(){ return location.origin + location.pathname; }
+async function copyText(txt, msg){
+  try{
+    if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(txt); }
+    else{
+      const ta = document.createElement('textarea');
+      ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    }
+    toast(msg);
+  }catch(e){ toast('Copy nahi hua — manually copy karo'); }
+}
+$('copyBtn').addEventListener('click', () => copyText($('msgBox').value, '📋 Message copy ho gaya!'));
+$('linkBtn').addEventListener('click', () => copyText(currentUrl(), '🔗 Link copy ho gaya — WhatsApp pe bhejo!'));
+$('waBtn').addEventListener('click', e => {
+  const url = currentUrl();
+  e.currentTarget.href = 'https://wa.me/?text=' + encodeURIComponent($('msgBox').value);
+});
+$('nativeBtn').addEventListener('click', async () => {
+  if(navigator.share){
+    try{ await navigator.share({ title: '🪔 Diwali Special Quiz', text: $('msgBox').value, url: currentUrl() }); }
+    catch(e){}
+  } else { copyText($('msgBox').value + ' ' + currentUrl(), '📋 Link copy ho gaya!'); }
+});
+$('wishBtn').addEventListener('click', () => {
+  const url = currentUrl();
+  $('msgBox').value = '🪔 *Happy Diwali ' + (S.name || 'yaar') + '* 🪔\n\n' +
+    'Maine *' + CONFIG.hostName + '* ka Diwali quiz khele aur mera score hai: *' + S.score + '/' + MAX_POINTS + '*\n\n' +
+    '👉 Tum bhi khelo: ' + url + '\n\n' +
+    '✨ ' + CONFIG.hostTagline;
+  copyText($('msgBox').value, '🪔 Wish copy ho gaya — paste kar do!');
+});
+$('againBtn').addEventListener('click', () => { $('nameInput').value = S.name; startQuiz(); });
+$('editBtn').addEventListener('click', () => { show('s-home'); renderLB(); });
+$('restartBtn').addEventListener('click', () => { $('nameInput').value = localStorage.getItem('dwq_name') || ''; show('s-home'); renderLB(); });
+$('soundBtn').addEventListener('click', () => {
+  soundOn = !soundOn;
+  localStorage.setItem('dwq_sound', soundOn ? 'on' : 'off');
+  $('soundBtn').textContent = soundOn ? '🔊' : '🔇';
+  $('soundBtn').classList.toggle('off', !soundOn);
+  if(soundOn) beep(700,.08,'sine',.15);
+});
+$('soundBtn').textContent = soundOn ? '🔊' : '🔇';
+$('soundBtn').classList.toggle('off', !soundOn);
+
+/* =========================================================
+   SAVE RESULT AS IMAGE (PNG)
+   ========================================================= */
+$('imgBtn').addEventListener('click', () => {
+  const W = 1080, H = 1350, c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const g = c.getContext('2d');
+  const grd = g.createLinearGradient(0,0,W,H);
+  grd.addColorStop(0,'#3d0c1c'); grd.addColorStop(.5,'#6d1330'); grd.addColorStop(1,'#17040c');
+  g.fillStyle = grd; g.fillRect(0,0,W,H);
+  for(let i=0;i<160;i++){
+    g.globalAlpha = Math.random()*.55+.15;
+    g.fillStyle = ['#ffc542','#ff7a18','#ffe08a','#25d366'][Math.floor(Math.random()*4)];
+    g.beginPath(); g.arc(Math.random()*W, Math.random()*H, Math.random()*4+1, 0, 6.283); g.fill();
+  }
+  g.globalAlpha = 1;
+  g.textAlign = 'center';
+  g.fillStyle = '#ffc542'; g.font = '120px serif'; g.fillText('🪔', W/2, 190);
+  g.fillStyle = '#ffd76a'; g.font = 'bold 78px "Baloo 2", sans-serif'; g.fillText('DIWALI QUIZ', W/2, 320);
+  g.fillStyle = '#ffeec9'; g.font = '44px "Poppins", sans-serif';
+  g.fillText('— ' + S.name + ' —', W/2, 400);
+  g.fillStyle = '#ffffff'; g.font = 'bold 190px "Baloo 2", sans-serif';
+  g.fillText(String(S.score), W/2, 620);
+  g.fillStyle = '#ffc542'; g.font = 'bold 60px "Baloo 2", sans-serif';
+  g.fillText('/ ' + MAX_POINTS + '  (' + Math.round(S.score/MAX_POINTS*100) + '%)', W/2, 700);
+  const tier = TIERS.find(t => S.score / MAX_POINTS >= t.min);
+  g.fillStyle = '#ffeec9'; g.font = '44px "Poppins", sans-serif';
+  wrap(g, tier.t, W/2, 790, 900, 58);
+  g.fillStyle = '#ffd76a'; g.font = 'bold 40px "Poppins", sans-serif';
+  g.fillText('Correct: ' + S.correct + '   |   Wrong: ' + S.wrong + '   |   Streak: ' + S.bestStreak, W/2, 990);
+  g.fillStyle = '#ffb4c0'; g.font = '36px "Poppins", sans-serif';
+  g.fillText(CONFIG.hostTagline, W/2, 1080);
+  g.fillStyle = '#c9a86a'; g.font = '30px "Poppins", sans-serif';
+  g.fillText(currentUrl(), W/2, 1180);
+  g.strokeStyle = 'rgba(255,197,66,.6)'; g.lineWidth = 6;
+  g.strokeRect(40, 40, W-80, H-80);
+  const a = document.createElement('a');
+  a.download = 'diwali-quiz-' + (S.name || 'result').replace(/\s+/g,'-') + '.png';
+  a.href = c.toDataURL('image/png');
+  a.click();
+  toast('🖼️ Image save ho gayi!');
+});
+function wrap(g, text, x, y, maxW, lh){
+  const words = String(text).split(' ');
+  let line = '', yy = y;
+  words.forEach(w => {
+    const test = line ? line + ' ' + w : w;
+    if(g.measureText(test).width > maxW && line){ g.fillText(line, x, yy); line = w; yy += lh; }
+    else line = test;
+  });
+  if(line) g.fillText(line, x, yy);
+}
+
+/* =========================================================
+   INIT
+   ========================================================= */
+renderLB();
+showBest();
+if(urlName){
+  $('homeSub').textContent = 'Aapko ' + CONFIG.hostName + ' ne Diwali quiz mein bulaya hai — shuru karein! 🪔🎆';
+}
+</script>
+</body>
+</html>
